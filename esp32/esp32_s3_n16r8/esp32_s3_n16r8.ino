@@ -1,34 +1,46 @@
 #include <Adafruit_NeoPixel.h>
 
-#define RGB_PIN   48     // onboard RGB LED pin
-#define LED_COUNT 1
+#define RGB_PIN       48   // Standard pin for built-in LED on S3 DevKit M
+#define NUMPIXELS     1    
+#define DELAYVAL      500  
 
-Adafruit_NeoPixel rgb(LED_COUNT, RGB_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  rgb.begin();
-  rgb.setBrightness(50);   // 0–255
-  rgb.show();              // turn off initially
+  // 1. Initialize Serial Communication at 115200 baud
+  Serial.begin(115200);
+  
+  // Wait for Serial Monitor to open (useful for S3 Native USB)
+  while (!Serial) { delay(10); } 
+
+  pixels.begin(); 
+  pixels.setBrightness(50); 
+  randomSeed(analogRead(0)); 
+
+  Serial.println("System Ready: Starting Random Color Blink...");
 }
 
 void loop() {
-  // RED
-  rgb.setPixelColor(0, rgb.Color(255, 0, 0));
-  rgb.show();
-  delay(500);
+  // 2. Generate random values
+  int r = random(0, 256);
+  int g = random(0, 256);
+  int b = random(0, 256);
 
-  // GREEN
-  rgb.setPixelColor(0, rgb.Color(0, 255, 0));
-  rgb.show();
-  delay(500);
+  // 3. Print the values to Serial Monitor
+  Serial.print("Blinking Color -> R: ");
+  Serial.print(r);
+  Serial.print(" | G: ");
+  Serial.print(g);
+  Serial.print(" | B: ");
+  Serial.println(b);
 
-  // BLUE
-  rgb.setPixelColor(0, rgb.Color(0, 0, 255));
-  rgb.show();
-  delay(500);
+  // 4. LED ON
+  pixels.setPixelColor(0, pixels.Color(r, g, b));
+  pixels.show();   
+  delay(DELAYVAL); 
 
-  // OFF
-  rgb.clear();
-  rgb.show();
-  delay(500);
+  // 5. LED OFF
+  pixels.setPixelColor(0, pixels.Color(0, 0, 0));
+  pixels.show();
+  delay(DELAYVAL); 
 }
