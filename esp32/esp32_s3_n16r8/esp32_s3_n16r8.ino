@@ -1,15 +1,34 @@
-#define LED_PIN 8
+#include <Adafruit_NeoPixel.h>
+
+#define RGB_PIN   48     // onboard RGB LED pin
+#define LED_COUNT 1
+
+Adafruit_NeoPixel rgb(LED_COUNT, RGB_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
-  Serial.begin(115200);
-  delay(1000);
-  Serial.println("ESP32-C3 Super Mini Ready");
+  rgb.begin();
+  rgb.setBrightness(50);   // 0–255
+  rgb.show();              // turn off initially
 }
 
 void loop() {
-  digitalWrite(LED_PIN, HIGH);
+  // RED
+  rgb.setPixelColor(0, rgb.Color(255, 0, 0));
+  rgb.show();
   delay(500);
-  digitalWrite(LED_PIN, LOW);
+
+  // GREEN
+  rgb.setPixelColor(0, rgb.Color(0, 255, 0));
+  rgb.show();
+  delay(500);
+
+  // BLUE
+  rgb.setPixelColor(0, rgb.Color(0, 0, 255));
+  rgb.show();
+  delay(500);
+
+  // OFF
+  rgb.clear();
+  rgb.show();
   delay(500);
 }
