@@ -14,7 +14,6 @@ The ESP32-S3 Dev Kit M is based on ESP32-S3 and comes with:
 ### configurations
 
 - USB CDC On Boot → Disabled
-- Upload Speed: 921600
 - CPU Frequency: 240MHz (WiFi)"
 - Core Debug Level: "None"
 - USB DFU On Boot: "Disabled"
@@ -36,3 +35,4 @@ The ESP32-S3 Dev Kit M is based on ESP32-S3 and comes with:
 - https://randomnerdtutorials.com/esp32-s3-devkitc-pinout-guide/
 - https://www.circuitstate.com/tutorials/getting-started-with-esp32-s3-wi-fi-bluetooth-soc-using-esp32-s3-dev-kit-nxr8/
 - https://lonelybinary.com/blogs/tinkerblock-esp32-s3-starter-kit/01_2_esp32-s3_two_usb_ports_guide
+
